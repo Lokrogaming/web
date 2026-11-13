@@ -3,6 +3,6 @@ function copy(target) {
 if (target === "decrypt") { const text = decOutText.innerText; navigator.clipboard.writeText(text); alert("Copied to Clipboard!")
 } else { const text = encOutput.innerText; navigator.clipboard.writeText(text); alert("Copied to clipboard!") }
 }
-</script><script type="module"> import { encoder, decoder } from './sprinkle.js'
+</script><script type="module"> import { encoder, decoder } from 'https://lokrogaming.github.io/web/sprinkle.js'
   document.getElementById('btnEncrypt').addEventListener('click', async () => { const text = document.getElementById('encText').value; const outputDiv = document.getElementById('encOutput'); try { const result = await encoder(text); outputDiv.textContent = result; outputDiv.classList.remove('error'); } catch (err) { outputDiv.textContent = "Fehler: " + err.message; outputDiv.classList.add('error'); } });
   document.getElementById('btnDecrypt').addEventListener('click', async () => { const input = document.getElementById('decInput').value.trim(); const outputDiv = document.getElementById('decOutput'); try { if(!input) throw new Error("Bitte verschlüsselten Text eingeben."); const result = await decoder(input); outputDiv.innerHTML = ` <p id="decOutText">${result.text}</p> `; outputDiv.classList.remove('error'); } catch (err) { outputDiv.textContent = "Fehler beim Entschlüsseln. Das Format ist ungültig oder der String wurde manipuliert."; outputDiv.classList.add('error'); } }); </script></body></html>
